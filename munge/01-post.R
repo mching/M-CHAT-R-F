@@ -1,6 +1,9 @@
 # Preprocessing script for post questionnaire
-# Note: Corrected data is for 28 responses only. If more are received, you need
+# Note: Corrected data is for 30 responses only. If more are received, you need
 # to manually correct additional entries
+
+# Make list into data frame
+post <- as.data.frame(post)
 
 #############################
 # Keep only the variables that start with a lower case q
@@ -20,8 +23,6 @@ post <- post.filtered
 rm(post.filtered)
 rm(lower.q.questions)
 
-# Make list into data frame
-post <- as.data.frame(post)
 
 ##########################
 # q0001_0001, 0002, 0003 : convert to variables on how an individual is involved
@@ -52,8 +53,8 @@ rm(a)
 
 # One person failed to respond to this question, respondent 16
 # post[40] == 0 & post[41] == 0 & post[42] == 0
-
-# make respondent 16 into NA on all roles
+# If you add more data, you need to check respondent 16 is still same #
+# make respondent 16 into NA on all roles (ok through 30 responses)
 post[16, 40:42] <- NA
 
 # Correct q0007. Correct answers were selected manually because of the judgment involved
@@ -65,17 +66,17 @@ post$q0007_correct[correct_respondents] <- 1
 post$q0007_correct[post$q0007 == post$q0007[12]] <- NA # Make NAs for not answered in q0007
 
 # CONTINUE EDITING HERE
-pre$q0006_correct <- factor(pre$q0006_correct)
+post$q0007_correct <- factor(post$q0007_correct)
 rm(correct_respondents)
 
 # Make matching codes all uppercase to facilitate matching
-pre$q0011 <- toupper(pre$q0011)
+post$q0014 <- toupper(post$q0014)
 
 # Trim leading and trailing white space
-pre$q0011 <- gsub("^\\s+|\\s+$", "", pre$q0011)
+post$q0014 <- gsub("^\\s+|\\s+$", "", post$q0014)
 
 # Make "" into NAs
-pre$q0011[pre$q0011 == ""] <- NA
+post$q0014[post$q0014 == ""] <- NA
 
-# Rename q0011 to match_ID
-pre$match_ID <- pre$q0011
+# Rename q0014 to match_ID
+post$match_ID <- post$q0014
