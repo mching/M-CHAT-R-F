@@ -42,6 +42,12 @@ pre$care_direct <- as.factor(pre$care_direct)
 pre$care_supervise <- as.factor(pre$care_supervise)
 pre$care_no_direct_or_supervise <- as.factor(pre$care_no_direct_or_supervise)
 
+# If no direct care or supervision, make their responses on q2-10 into NA
+a <- pre$care_no_direct_or_supervise == 1
+names(pre)
+pre[a, 5:26] <- NA
+rm(a)
+
 # Correct q0006. Correct answers were selected manually because of the judgment involved
 # in determining if the respondent was correct
 pre$q0006_correct <- rep(0, length(pre$q0006))
