@@ -3,6 +3,7 @@
 #############################
 # Keep only the variables that start with a lower case q
 #############################
+pre <- as.data.frame(pre)
 
 # Create a vector of variable names
 variable.names <- names(pre) 
