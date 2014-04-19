@@ -1,0 +1,7 @@
+Finish the post data set modifications in 01-post.R
+Check that loading and cleaning works the way it should using ProjectTemplate
+
+change pre-merged variable names to pre.name and post.name
+fix post dataset match_IDs that are like "-----0" as NA
+
+For some reason the match isn't working well. We are getting more records back than the sum of pre and post when we should be getting fewer.
