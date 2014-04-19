@@ -65,18 +65,18 @@ correct_respondents <- c(6, 9, 10, 13, 16, 21, 23)
 post$q0007_correct[correct_respondents] <- 1
 post$q0007_correct[post$q0007 == post$q0007[12]] <- NA # Make NAs for not answered in q0007
 
-# CONTINUE EDITING HERE
 post$q0007_correct <- factor(post$q0007_correct)
 rm(correct_respondents)
 
 # Make matching codes all uppercase to facilitate matching
-post$q0014 <- toupper(post$q0014)
+post$matchID <- toupper(post$q0014)
 
 # Trim leading and trailing white space
-post$q0014 <- gsub("^\\s+|\\s+$", "", post$q0014)
+post$matchID <- gsub("^\\s+|\\s+$", "", post$matchID)
 
-# Make "" into NAs
-post$q0014[post$q0014 == ""] <- NA
+# Make "" into randoms
+post$matchID[post$matchID == ""] <- runif(table(post$matchID == "")[2])
 
-# Rename q0014 to match_ID
-post$match_ID <- post$q0014
+# Put prefix of pre_ on all variables except matchID
+# names(post)
+names(post)[-44] <- paste0("post_", names(post)[-44])
