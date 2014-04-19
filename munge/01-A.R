@@ -58,13 +58,14 @@ pre$q0006_correct <- factor(pre$q0006_correct)
 rm(correct_respondents)
 
 # Make matching codes all uppercase to facilitate matching
-pre$q0011 <- toupper(pre$q0011)
+pre$matchID <- toupper(pre$q0011)
 
 # Trim leading and trailing white space
-pre$q0011 <- gsub("^\\s+|\\s+$", "", pre$q0011)
+pre$matchID <- gsub("^\\s+|\\s+$", "", pre$matchID)
 
-# Make "" into NAs
-pre$q0011[pre$q0011 == ""] <- NA
+# Make "" into randoms
+pre$matchID[pre$matchID == ""] <- runif(runif(table(pre$matchID == "")[2]))
 
-# Rename q0011 to match_ID
-pre$match_ID <- pre$q0011
+# Put prefix of pre_ on all variables except matchID
+names(pre)[-38] <- paste0("pre_", names(pre)[-38])
+# head(pre)
