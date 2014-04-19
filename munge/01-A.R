@@ -12,12 +12,11 @@ lower.q.questions <- grep("^q", variable.names)
 rm(variable.names)
 
 # Filter dataset by these variables
-pre.filtered <- pre[, c(2, lower.q.questions)]
+pre.filtered <- pre[c(2, lower.q.questions)]
 pre.unfiltered <- pre
 pre <- pre.filtered
 rm(pre.filtered)
 rm(lower.q.questions)
-
 
 ##########################
 # q0001_0001, 0002, 0003 : convert to variables on how an individual is involved
@@ -50,3 +49,15 @@ pre$q0006_correct[correct_respondents] <- 1
 pre$q0006_correct[pre$q0006 == pre$q0006[12]] <- NA # Make NAs for not answered in q0006
 pre$q0006_correct <- factor(pre$q0006_correct)
 rm(correct_respondents)
+
+# Make matching codes all uppercase to facilitate matching
+pre$q0011 <- toupper(pre$q0011)
+
+# Trim leading and trailing white space
+pre$q0011 <- gsub("^\\s+|\\s+$", "", pre$q0011)
+
+# Make "" into NAs
+pre$q0011[pre$q0011 == ""] <- NA
+
+# Rename q0011 to match_ID
+pre$match_ID <- pre$q0011
