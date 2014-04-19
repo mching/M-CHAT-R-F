@@ -5,8 +5,8 @@ load.project()
 
 ## if no ProjectTemplate, use read.spss
 # library(foreign)
-# data <- read.spss("./data/pre.sav")
-
+# pre <- read.spss("./data/pre.sav")
+# post <- read.spss("./data/post.sav")
 
 for (dataset in project.info$data)
 {
