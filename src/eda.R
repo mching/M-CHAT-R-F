@@ -1,9 +1,13 @@
 rm(list = ls())
 
-library('ProjectTemplate')
+library(ProjectTemplate)
+library(binom)
 load.project()
 
-## if no ProjectTemplate, use read.spss
+## if you don't have ProjectTemplate, you can install via
+# install.packages("ProjectTemplate")
+
+## if no ProjectTemplate, you use read.spss
 # library(foreign)
 # pre <- read.spss("./data/pre.sav")
 # post <- read.spss("./data/post.sav")
