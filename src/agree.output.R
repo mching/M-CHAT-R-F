@@ -1,3 +1,9 @@
+# This helper function takes a variable stored as a factor where the possible
+# responses are Strongly Agree, Agree, and other (e.g., Neutral, Disagree,
+# Strongly Disagree). It plots the pre and post distributions, calculates the
+# percentage of Strongly Agree/Agree and exact confidence intervals, and runs
+# t-test and Fisher's Exact test on them.
+
 agree.output <- function(x1, x2, title1, title2) {
   par(mfrow = c(1,2))
   plot(x1, main = title1)
