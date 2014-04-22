@@ -48,7 +48,7 @@ plot(dat$post_q0004_0001, main = "post added value")
 par(mfrow = c(1,1))
 
 summary(dat$pre_q0003_0001)
-table0003pre <- table(dat$pre_q0003_0001 == "Most of the Time" | dat$pre_q0002_0001 == "Always") # Most/Always
+table0003pre <- table(dat$pre_q0003_0001 == "Most of the Time" | dat$pre_q0003_0001 == "Always") # Most/Always
 binom.confint(table0003pre[2], n = sum(table0003pre), method = "exact")
 
 summary(dat$post_q0004_0001)
@@ -109,33 +109,58 @@ fisher.test(matrix(c(table0007pre, table0009post), nrow = 2)) # Fisher test for 
 
 # q0008: When a patient has failed their M-CHAT, how often do you administer the
 # M-CHAT Follow-Up Interview?
-summary(pre$q0008_0001)
+par(mfrow = c(1,2))
+plot(dat$pre_q0008_0001, main = "pre administer f/u")
+plot(dat$post_q0010_0001, main = "post administer f/u")
+par(mfrow = c(1,1))
+
+summary(dat$pre_q0008_0001)
+table0008pre <- table(dat$pre_q0008_0001 == "Most of the Time" | dat$pre_q0008_0001 == "Always") # Most/Always
+binom.confint(table0008pre[2], n = sum(table0008pre), method = "exact")
+
+summary(dat$post_q0010_0001)
+table0010post <- table(dat$post_q0010_0001 == "Most of the Time" | dat$post_q0010_0001 == "Always") # Most/Always
+binom.confint(table0010post[2], n = sum(table0010post), method = "exact")
+
+summary(dat$pre_q0008_0001)
+mean(as.numeric(dat$pre_q0008_0001), na.rm = T)
+sd(as.numeric(dat$pre_q0008_0001), na.rm = T)
+
+mean(as.numeric(dat$post_q0010_0001), na.rm = T)
+sd(as.numeric(dat$post_q0010_0001), na.rm = T)
+
+t.test(as.numeric(dat$pre_q0008_0001), as.numeric(dat$post_q0010_0001), na.rm = T) # t-test on likert scale values
+fisher.test(matrix(c(table0008pre, table0010post), nrow = 2)) # Fisher test for ratios
+
+
 
 # q0009: What barriers do you see that make it difficult to administer the M-CHAT?
 # _0001: Lack of knowledge on how to score the M-CHAT
-summary(dat$pre_q0009_0001)
-plot(dat$pre_q0009_0001)
+agree.output(dat$pre_q0009_0001, dat$post_q0011_0001, "pre lack of knowledge", "post lack of knowledge")
 
 # _0002: Unable to find scoring sheet
-summary(dat$pre_q0009_0002)
+agree.output(dat$pre_q0009_0002, dat$post_q0011_0002, "pre can't find scoresheet", "post can't find sheet")
 
 # _0003: It takes too much time
-summary(dat$pre_q0009_0003)
+agree.output(dat$pre_q0009_0003, dat$post_q0011_0003, "pre too much time", "post too much time")
 
 # q0010: What barriers do you see that make it difficult to administer the
 # M-CHAT Follow-Up Interview?
 # _0001: Not aware there was a follow-up interview  
-summary(pre$q0010_0001)
+agree.output(dat$pre_q0010_0001, dat$post_q0012_0001, "pre not aware of interview", "post not aware of interview")
 
 # _0002: Not aware of how to do the follow-up interview	
-summary(pre$q0010_0002)
+agree.output(dat$pre_q0010_0002, dat$post_q0012_0002, "pre not aware of how to do", "post not aware of how to do")
 
 # _0003: Not aware of where to get the follow-up interview questions	
-summary(pre$q0010_0003)
+agree.output(dat$pre_q0010_0003, dat$post_q0012_0003, "pre not aware of where to get", "post not aware of where to get")
 
 # _0004: It takes too long
-summary(pre$q0010_0004)
+agree.output(dat$pre_q0010_0004, dat$post_q0012_0004, "pre takes too long", "post takes too long")
 
+# Training
+table0013post <- table(dat$post_q0013)
+binom.confint(table0013post[2], n = sum(table0013post), method = "exact")
 
 
 # Demographics breakdown
